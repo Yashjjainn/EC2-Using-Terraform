@@ -1,5 +1,6 @@
 # EC2-Using-Terraform
-We are going to try & learn the automation of provisioning of EC2 instances from AWS using Terraform.
+We are going to try & learn the automation of provisioning of EC2 instances from AWS using Terraform in Ubuntu.
+
 Terraform is an Infrastructure as Code (IaC) tool developed by HashiCorp. It helps us to define, provision, and manage cloud infrastructure using a declarative configuration language called HashiCorp Configuration Language (HCL).
 It follows a declaractive approach, meaning we define the desired state of our infrastructure, and Terraform ensures that the actual infrastructure matches that state.
 Terraform's workflow follows three major steps : 
@@ -42,3 +43,19 @@ echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
 https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
 sudo tee /etc/apt/sources.list.d/hashicorp.list
 ```
+ - `deb` Specifies that this is a Debian-based APT repository.
+ - `[signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg]`Ensures that only packages signed with the HashiCorp GPG key are trusted. Uses the key previously added to /usr/share/keyrings/hashicorp-archive-keyring.gpg.
+ - `$(lsb_release -cs)`Runs the command lsb_release -cs, which returns the codename of our Ubuntu/Debian release. This ensures that APT downloads the correct package versions for our distribution.
+
+- Download the package information from HashiCorp.
+  - 1st update APT
+```
+sudo apt update
+```
+  - then install terraform from the new repository
+```
+sudo apt-get install terraform
+```
+  - Verify the installation by running `terraform -help`
+
+- Now we enable tab completion for terraform (optional), run `touch ~/.bashrc` to ensure the shell config file exist and the run `terraform -install-autocomplete` to install terrform autocomplete, Once done restart the terminal or run `source ~/.bashrc` 
