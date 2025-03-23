@@ -24,9 +24,9 @@ wget -O- https://apt.releases.hashicorp.com/gpg | \
 gpg --dearmor | \
 sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
 ```
- - using `wget` we download the gpg key from hashicorp's website, using `-0-` we ensure it doesn't get saved in a file in current working directory, as we need to store process it into binary before storing it in correct directory for later use
- - we convert the output recieved from wget by passing it to `gpg --dearmor` as input using pipe(|) commnad into binary format required by apt
- - using `tee` we write the input to the specified file location while `> /dev/null` supresses the output to keep the terminal clean
+  - using `wget` we download the gpg key from hashicorp's website, using `-0-` we ensure it doesn't get saved in a file in current working directory, as we need to store process it into binary before storing it in correct directory for later use
+  - we convert the output recieved from wget by passing it to `gpg --dearmor` as input using pipe(|) commnad into binary format required by apt
+  - using `tee` we write the input to the specified file location while `> /dev/null` supresses the output to keep the terminal clean
 
 - Verify the gpg key's fingerprint to ensure it's integrity and authenticity
   - A GPG fingerprint is a unique identifier for a GPG key. It is a 40-character hexadecimal string that helps verify the authenticity of a key.
@@ -35,7 +35,7 @@ gpg --no-default-keyring \
 --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg \
 --fingerprint
 ```
- - 1st we we prevent gpg from using default keyring(it is a file that stores public and private GPG keys allowing the system to manage, store, and verify cryptographic keys securely) and then specify the exact keyring file to use and `--fingerprint` displays the fingerprint of the key in the specified keyring
+  - 1st we we prevent gpg from using default keyring(it is a file that stores public and private GPG keys allowing the system to manage, store, and verify cryptographic keys securely) and then specify the exact keyring file to use and `--fingerprint` displays the fingerprint of the key in the specified keyring
 
 - Now we add the official HashiCorp APT repository to our system so that we can install packages like Terraform, Vault, Consul, Packer, and Nomad using apt.
 ```
@@ -43,9 +43,9 @@ echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
 https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
 sudo tee /etc/apt/sources.list.d/hashicorp.list
 ```
- - `deb` Specifies that this is a Debian-based APT repository.
- - `[signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg]`Ensures that only packages signed with the HashiCorp GPG key are trusted. Uses the key previously added to /usr/share/keyrings/hashicorp-archive-keyring.gpg.
- - `$(lsb_release -cs)`Runs the command lsb_release -cs, which returns the codename of our Ubuntu/Debian release. This ensures that APT downloads the correct package versions for our distribution.
+  - `deb` Specifies that this is a Debian-based APT repository.
+  - `[signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg]`Ensures that only packages signed with the HashiCorp GPG key are trusted. Uses the key previously added to /usr/share/keyrings/hashicorp-archive-keyring.gpg.
+  - `$(lsb_release -cs)`Runs the command lsb_release -cs, which returns the codename of our Ubuntu/Debian release. This ensures that APT downloads the correct package versions for our distribution.
 
 - Download the package information from HashiCorp.
   - 1st update APT
